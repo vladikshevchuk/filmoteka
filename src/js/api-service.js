@@ -5,7 +5,7 @@ const MAIN_URL = 'https://api.themoviedb.org/3/';
 
 async function getApiService() {
   try {
-    const response = await axios.get(`${MAIN_URL}movie/popular${API_KEY}&language=en&page=9`);
+    const response = await axios.get(`${MAIN_URL}movie/popular${API_KEY}&language=en&page=1`);
     console.log(response);
   } catch (error) {
     console.error(error);
