@@ -1,0 +1,39 @@
+header {
+    height: 230px;
+
+    background-image: url('../images/header-bg.png');
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+        padding-top: 41px;
+
+        .logo {
+            margin-left: 10px;
+
+            font-size: 30px;
+            line-height: 35px;
+
+            align-items: center;
+            text-align: center;
+
+            color: #FFFFFF;
+        }
+
+        .link {
+            margin-left: 39px;
+            
+            font-size: 12px;
+            line-height: 14px;
+            /* identical to box height */
+            
+            align-items: center;
+            text-align: center;
+            text-transform: uppercase;
+
+            color: #FFFFFF;
+        }
+    }
+}
