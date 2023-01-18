@@ -1,6 +1,11 @@
-const Handlebars = require("handlebars");
 import templateFunction from './templates/list-movies.hbs';
-import getApiService from './js/api-service';
+import MoviesApiService from './js/api-service';
 
-// document.main.innerHTML = templateFunction();
-// getApiService();
+const refMain = document.querySelector('main');
+
+const moviesApiService = new MoviesApiService();
+
+moviesApiService.getMovies().then(movies => {
+    refMain.innerHTML = templateFunction(movies);
+    console.log(movies);
+})
