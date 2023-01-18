@@ -1,0 +1,15 @@
+.list-popular {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0;
+
+    li {
+        margin-top: 25px;
+    }
+
+    p {
+        width: 300px;
+        margin-top: 7px;
+    }
+}
