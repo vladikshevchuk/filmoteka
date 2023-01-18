@@ -3,7 +3,7 @@ header {
 
     background-image: url('../images/header-bg.png');
 
-    nav {
+    .navigation {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
@@ -34,6 +34,30 @@ header {
             text-transform: uppercase;
 
             color: #FFFFFF;
+        }
+    }
+
+    .search-line {
+        margin-top: 50px;
+        text-align: center;
+
+        button {
+            background-color: rgba(255, 255, 255, 0);
+            
+            border: none;
+            outline: none;
+
+            cursor: pointer;
+        }
+        
+        input {
+            width: 300px;
+            margin-right: 10px;
+            padding-left: 10px;
+
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 24px;
         }
     }
 }

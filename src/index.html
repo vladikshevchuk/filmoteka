@@ -10,16 +10,26 @@
   <body>
     <header class="container">
       <nav>
-        <div class="logo-div">
-          <svg class="icon" width="24px" height="24px">
-            <use href="./images/symbol-defs.svg#icon-film"></use>
-          </svg>
-          <a class="logo" href="#">Filmoteka</a>
+        <div class="navigation">
+          <div class="logo-div">
+            <svg class="icon" width="24px" height="24px">
+              <use href="./images/symbol-defs.svg#icon-film"></use>
+            </svg>
+            <a class="logo" href="#">Filmoteka</a>
+          </div>
+          <div class="links">
+            <a class="link" href="#">Home</a>
+            <a class="link" href="#">my library</a>
+          </div>
         </div>
-        <div class="links">
-          <a class="link" href="#">Home</a>
-          <a class="link" href="#">my library</a>
-        </div>
+        <form class="search-line">
+          <input type="text" name="search" placeholder="Поиск фильмов">
+          <button>
+            <svg class="icon" width="24px" height="24px">
+              <use href="./images/symbol-defs.svg#icon-search"></use>
+            </svg>
+          </button>
+        </form>
       </nav>
     </header>
     <main class="container">

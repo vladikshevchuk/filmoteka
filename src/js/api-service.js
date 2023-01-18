@@ -3,8 +3,6 @@ import axios from 'axios';
 const API_KEY = '?api_key=fb4eca5dd3545235e4fd6796c70d4d40';
 const MAIN_URL = 'https://api.themoviedb.org/3/';
 
-const refMain = document.querySelector('main');
-
 export default class MoviesApiService {
   constructor() {
     this.searchQuery = '';
