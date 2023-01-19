@@ -1,15 +1,20 @@
 import templateFunction from './templates/list-movies.hbs';
 import MoviesApiService from './js/api-service';
 import onSearchLine from './js/search-line';
-
-const refMain = document.querySelector('main');
+import refs from './js/refs';
 
 const moviesApiService = new MoviesApiService();
 
 moviesApiService.getMovies().then(movies => {
-    refMain.innerHTML = templateFunction(movies);
-    console.log(movies);
+    refs.main.innerHTML = templateFunction(movies);
 });
 
-const refForm = document.querySelector('form');
-refForm.addEventListener('submit', onSearchLine);
+refs.form.addEventListener('submit', onSearchLine);
+refs.library.addEventListener('click', e => {
+    refs.form.classList.add('is-hidden');
+    refs.navBtns.classList.remove('is-hidden');
+});
+refs.menu.addEventListener('click', e => {
+    refs.navBtns.classList.add('is-hidden');
+    refs.form.classList.remove('is-hidden');
+});

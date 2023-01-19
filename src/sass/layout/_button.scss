@@ -1,0 +1,23 @@
+.button {
+  width: 136px;
+  height: 44px;
+
+  font-size: 12px;
+  line-height: 16px;
+  /* or 133% */
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #ffffff;
+
+  background: rgba($color: #000000, $alpha: 0);
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    background: #ff6b01;
+    border: 1px solid #ff6b01;
+  }
+}

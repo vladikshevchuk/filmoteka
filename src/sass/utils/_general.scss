@@ -1,27 +1,27 @@
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
-    margin-left: auto;
-    margin-right: auto;
-    width: 1440px;
-    background-color: #FFFFFF;
-    color: #000000;
-    font-family: 'Roboto', serif;
-    font-style: normal;
-    font-weight: 500;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1440px;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Roboto', serif;
+  font-style: normal;
+  font-weight: 500;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 h1,
@@ -31,15 +31,22 @@ h4,
 h5,
 h6,
 p {
-    margin: 0;
+  margin: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  border: none;
+  outline: none;
+
+  cursor: pointer;
 }

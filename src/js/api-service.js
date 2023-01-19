@@ -32,7 +32,6 @@ export default class MoviesApiService {
         );
       } else {
         Notify.success(`Найденно ${response.data.total_results} фильмов`);
-        console.log(response);
         return response.data.results;
       }
     } catch (error) {

@@ -1,63 +1,68 @@
 header {
-    height: 230px;
+  height: 230px;
 
-    background-image: url('../images/header-bg.png');
+  background-image: url('../images/header-bg.png');
 
-    .navigation {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 
-        padding-top: 41px;
+    padding-top: 41px;
 
-        .logo {
-            margin-left: 10px;
+    .logo {
+      margin-left: 10px;
 
-            font-size: 30px;
-            line-height: 35px;
+      font-size: 30px;
+      line-height: 35px;
 
-            align-items: center;
-            text-align: center;
+      align-items: center;
+      text-align: center;
 
-            color: #FFFFFF;
-        }
-
-        .link {
-            margin-left: 39px;
-            
-            font-size: 12px;
-            line-height: 14px;
-            /* identical to box height */
-            
-            align-items: center;
-            text-align: center;
-            text-transform: uppercase;
-
-            color: #FFFFFF;
-        }
+      color: #ffffff;
     }
 
-    .search-line {
-        margin-top: 50px;
-        text-align: center;
+    .link {
+      margin-left: 39px;
 
-        button {
-            background-color: rgba(255, 255, 255, 0);
-            
-            border: none;
-            outline: none;
+      font-size: 12px;
+      line-height: 14px;
+      /* identical to box height */
 
-            cursor: pointer;
-        }
-        
-        input {
-            width: 300px;
-            margin-right: 10px;
-            padding-left: 10px;
+      align-items: center;
+      text-align: center;
+      text-transform: uppercase;
 
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 24px;
-        }
+      color: #ffffff;
     }
+  }
+
+  .search-line {
+    margin-top: 50px;
+    text-align: center;
+
+    button {
+      background-color: rgba(255, 255, 255, 0);
+    }
+
+    input {
+      width: 300px;
+      margin-right: 10px;
+      padding-left: 10px;
+
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+
+  .nav-buttons {
+    margin-top: 50px;
+    text-align: center;
+
+
+    .button + .button {
+      margin-left: 15px;
+    }
+  }
 }
