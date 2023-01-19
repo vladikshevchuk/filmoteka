@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const API_KEY = '?api_key=fb4eca5dd3545235e4fd6796c70d4d40';
 const MAIN_URL = 'https://api.themoviedb.org/3/';
@@ -12,9 +13,28 @@ export default class MoviesApiService {
   async getMovies() {
     try {
       const response = await axios.get(
-        `${MAIN_URL}movie/popular${API_KEY}&language=en&page=1`
+        `${MAIN_URL}movie/popular${API_KEY}&language=en-US&page=1`
       );
       return response.data.results;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async getSearchMovies(query) {
+    try {
+      const response = await axios.get(
+        `${MAIN_URL}search/movie${API_KEY}&language=en-US&page=1&query=${query}`
+      );
+      if (response.data.results.length < 1) {
+        Notify.warning(
+          'Извините, ничего не удалось найти. Попробуйте изменить строку поиска'
+        );
+      } else {
+        Notify.success(`Найденно ${response.data.total_results} фильмов`);
+        console.log(response);
+        return response.data.results;
+      }
     } catch (error) {
       console.error(error);
     }
