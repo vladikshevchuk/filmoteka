@@ -10,11 +10,45 @@ moviesApiService.getMovies().then(movies => {
 });
 
 refs.form.addEventListener('submit', onSearchLine);
+
 refs.library.addEventListener('click', e => {
     refs.form.classList.add('is-hidden');
     refs.navBtns.classList.remove('is-hidden');
+    
+    refs.menu.classList.remove('is-active');
+    refs.library.classList.add('is-active');
+
+    moviesApiService.cleanHTML();
 });
 refs.menu.addEventListener('click', e => {
     refs.navBtns.classList.add('is-hidden');
     refs.form.classList.remove('is-hidden');
+
+    refs.library.classList.remove('is-active');
+    refs.menu.classList.add('is-active');
+
+    moviesApiService.getMovies().then(movies => {
+        refs.main.innerHTML = templateFunction(movies);
+    });
+});
+
+refs.langEn.addEventListener('click', e => {
+    refs.langEn.classList.add('is-active');
+    refs.langRu.classList.remove('is-active');
+
+    moviesApiService.changeLanguage('en');
+
+    moviesApiService.getMovies().then(movies => {
+        refs.main.innerHTML = templateFunction(movies);
+    });
+});
+refs.langRu.addEventListener('click', e => {
+    refs.langRu.classList.add('is-active');
+    refs.langEn.classList.remove('is-active');
+
+    moviesApiService.changeLanguage('ru');
+
+    moviesApiService.getMovies().then(movies => {
+        refs.main.innerHTML = templateFunction(movies);
+    });
 });

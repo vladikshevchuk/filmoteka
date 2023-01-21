@@ -10,6 +10,10 @@ header {
 
     padding-top: 41px;
 
+    .nav-blok {
+      display: flex;
+    }
+
     .logo {
       margin-left: 10px;
 
@@ -24,6 +28,7 @@ header {
 
     .link {
       margin-left: 39px;
+      padding-bottom: 3px;
 
       font-size: 12px;
       line-height: 14px;
@@ -34,6 +39,22 @@ header {
       text-transform: uppercase;
 
       color: #ffffff;
+    }
+
+    .lang-blok {
+      display: flex;
+      margin-left: 100px;
+
+      a {
+        color: #ffffff;
+      }
+
+      .lang-seporation {
+        margin-left: 10px;
+        margin-right: 10px;
+
+        color: #ffffff;
+      }
     }
   }
 

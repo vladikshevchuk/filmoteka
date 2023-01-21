@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import refs from './refs';
 
 const API_KEY = '?api_key=fb4eca5dd3545235e4fd6796c70d4d40';
 const MAIN_URL = 'https://api.themoviedb.org/3/';
@@ -8,13 +9,15 @@ export default class MoviesApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.language = 'ru';
   }
 
   async getMovies() {
     try {
       const response = await axios.get(
-        `${MAIN_URL}movie/popular${API_KEY}&language=en-US&page=1`
+        `${MAIN_URL}movie/popular${API_KEY}&language=${this.language}&page=${this.page}`
       );
+      this.incrementPage();
       return response.data.results;
     } catch (error) {
       console.error(error);
@@ -24,7 +27,7 @@ export default class MoviesApiService {
   async getSearchMovies(query) {
     try {
       const response = await axios.get(
-        `${MAIN_URL}search/movie${API_KEY}&language=en-US&page=1&query=${query}`
+        `${MAIN_URL}search/movie${API_KEY}&language=ru&page=1&query=${query}`
       );
       if (response.data.results.length < 1) {
         Notify.warning(
@@ -32,6 +35,7 @@ export default class MoviesApiService {
         );
       } else {
         Notify.success(`Найденно ${response.data.total_results} фильмов`);
+        this.incrementPage();
         return response.data.results;
       }
     } catch (error) {
@@ -40,7 +44,7 @@ export default class MoviesApiService {
   }
 
   cleanHTML() {
-    refs.gallery.innerHTML = '';
+    return refs.main.innerHTML = '';
   }
 
   incrementPage() {
@@ -49,6 +53,10 @@ export default class MoviesApiService {
 
   resetPage() {
     this.page = 1;
+  }
+
+  changeLanguage(lang) {
+    this.language = lang;
   }
 
   get query() {
