@@ -1,12 +1,22 @@
-<ul class="list">
-    {{#each this}}
-    <li class="js-item">
-        <div class="movie__markup__img">
-            <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt={{title}} width="300px" height="450px" />
-        </div>
-        <p>Название: {{original_title}}</p>
-        <p>Дата выхода: {{release_date}}</p>
-        <p>Рейтинг: {{vote_average}}</p>
+<ul class='list'>
+  {{#each this}}
+    <li class='js-item'>
+      <div class='movie__markup__img'>
+        <img
+          src='https://image.tmdb.org/t/p/w500{{poster_path}}'
+          alt={{title}}
+          width='300px'
+          height='450px'
+        />
+      </div>
+      <p>Название: {{original_title}}</p>
+      <p>Дата выхода: {{release_date}}</p>
+      <p>Рейтинг: {{vote_average}}</p>
     </li>
-    {{/each}}
+  {{/each}}
 </ul>
+<div class='pagination'>
+  <button class='pagin-el js-btn-back' type='button'><</button>
+  <p class='pagin-el js-page-num'>1</p>
+  <button class='pagin-el js-btn-next' type='button'>></button>
+</div>

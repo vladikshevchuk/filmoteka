@@ -5,11 +5,15 @@ import refs from './js/refs';
 
 const moviesApiService = new MoviesApiService();
 
+// первичная загрузка страницы
+
 moviesApiService.getMovies().then(movies => {
     refs.main.innerHTML = templateFunction(movies);
 });
 
 refs.form.addEventListener('submit', onSearchLine);
+
+// переключение между вкладками
 
 refs.library.addEventListener('click', e => {
     refs.form.classList.add('is-hidden');
@@ -32,6 +36,8 @@ refs.menu.addEventListener('click', e => {
     });
 });
 
+// переключение языка страницы
+
 refs.langEn.addEventListener('click', e => {
     refs.langEn.classList.add('is-active');
     refs.langRu.classList.remove('is-active');
@@ -52,3 +58,5 @@ refs.langRu.addEventListener('click', e => {
         refs.main.innerHTML = templateFunction(movies);
     });
 });
+
+// пагинация

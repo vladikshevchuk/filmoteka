@@ -17,7 +17,6 @@ export default class MoviesApiService {
       const response = await axios.get(
         `${MAIN_URL}movie/popular${API_KEY}&language=${this.language}&page=${this.page}`
       );
-      this.incrementPage();
       return response.data.results;
     } catch (error) {
       console.error(error);
@@ -27,7 +26,7 @@ export default class MoviesApiService {
   async getSearchMovies(query) {
     try {
       const response = await axios.get(
-        `${MAIN_URL}search/movie${API_KEY}&language=ru&page=1&query=${query}`
+        `${MAIN_URL}search/movie${API_KEY}&language=ru&page=${this.page}&query=${query}`
       );
       if (response.data.results.length < 1) {
         Notify.warning(
@@ -35,7 +34,6 @@ export default class MoviesApiService {
         );
       } else {
         Notify.success(`Найденно ${response.data.total_results} фильмов`);
-        this.incrementPage();
         return response.data.results;
       }
     } catch (error) {
@@ -47,12 +45,16 @@ export default class MoviesApiService {
     return refs.main.innerHTML = '';
   }
 
-  incrementPage() {
+  nextPage() {
     this.page += 1;
   }
 
-  resetPage() {
-    this.page = 1;
+  backPage() {
+    if (this.page > 1) {
+      this.page -= 1;
+    }
+
+    return
   }
 
   changeLanguage(lang) {

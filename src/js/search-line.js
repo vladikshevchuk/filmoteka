@@ -10,7 +10,7 @@ export default function onSearchLine(event) {
   } = event.currentTarget;
     
     moviesApiService.getSearchMovies(search.value).then(movies => {
-        refs.main.innerHTML = templateFunction(movies)
+        refs.listMovies.innerHTML = templateFunction(movies)
     });
 }
 

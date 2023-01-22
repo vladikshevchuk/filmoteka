@@ -13,3 +13,15 @@
         margin-top: 7px;
     }
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+    .pagin-el + .pagin-el {
+        margin-left: 20px;
+    }
+}
