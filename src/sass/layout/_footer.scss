@@ -1,10 +1,15 @@
 footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 30px 271px;
+    @media screen and (min-width: 768px) {
+        padding: 30px 271px;
+
+        display: flex;
+        justify-content: space-between;
+
+        font-size: 16px;
+    }
 
     font-weight: 400;
-    font-size: 16px;
+
     line-height: 19px;
     /* identical to box height */
     

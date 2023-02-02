@@ -1,0 +1,12 @@
+<ul class='list'>
+    {{#each this}}
+    <li class='js-item'>
+        <div class='movie__markup__img'>
+            <img src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt={{title}} width='300px' height='450px' />
+        </div>
+        <p>Title: {{original_title}}</p>
+        <p>Release date: {{release_date}}</p>
+        <p>Rating: {{vote_average}}</p>
+    </li>
+    {{/each}}
+</ul>

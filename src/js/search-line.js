@@ -8,9 +8,9 @@ export default function onSearchLine(event) {
   const {
     elements: { search },
   } = event.currentTarget;
-    
+
     moviesApiService.getSearchMovies(search.value).then(movies => {
-        refs.listMovies.innerHTML = templateFunction(movies)
+        refs.main.innerHTML = templateFunction(movies.data.results)
     });
 }
 

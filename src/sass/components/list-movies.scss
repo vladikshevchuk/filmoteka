@@ -1,27 +1,34 @@
 .list {
+    @media screen and (min-width: 375px) and (max-width: 767px)  {
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+  @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0;
+  }
 
-    li {
-        margin-top: 25px;
-    }
+  li {
+    margin-top: 25px;
+  }
 
-    p {
-        width: 300px;
-        margin-top: 7px;
-    }
+  p {
+    width: 280px;
+    margin-top: 7px;
+  }
 }
 
 .pagination {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    margin-top: 30px;
-    margin-bottom: 30px;
-    
-    .pagin-el + .pagin-el {
-        margin-left: 20px;
-    }
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  .pagin-el + .pagin-el {
+    margin-left: 20px;
+  }
 }

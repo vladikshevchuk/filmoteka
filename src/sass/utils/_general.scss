@@ -9,9 +9,12 @@ html {
 }
 
 body {
+  @media screen and (min-width: 1024px) {
+    width: 1440px;
+  }
+  
   margin-left: auto;
   margin-right: auto;
-  width: 1440px;
   background-color: #ffffff;
   color: #000000;
   font-family: 'Roboto', serif;
