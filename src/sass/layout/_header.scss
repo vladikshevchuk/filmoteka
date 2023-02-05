@@ -1,6 +1,10 @@
 header {
   height: 230px;
 
+  position: sticky;
+  top: -1px;
+  z-index: 888;
+
   @media screen and (max-width: 767px) {
     background-image: linear-gradient(
         to right,
@@ -49,6 +53,56 @@ header {
     }
   }
 
+  .library-bg {
+    @media screen and (max-width: 767px) {
+      background-image: linear-gradient(
+          to right,
+          rgba(47, 48, 58, 0),
+          rgba(47, 48, 58, 0)
+        ),
+        url(../images/bg-mobile/bg-library-mob-1x.jpg);
+
+      @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: url(../images/bg-mobile/bg-library-mob-2x.jpg);
+      }
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1199px) {
+      background-image: linear-gradient(
+          to right,
+          rgba(47, 48, 58, 0),
+          rgba(47, 48, 58, 0)
+        ),
+        url(../images/bg-tablet/bg-library-tab-1x.jpg);
+
+      @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: url(../images/bg-tablet/bg-library-tab-2x.jpg);
+      }
+    }
+
+    @media screen and (min-width: 1024px) {
+      background-image: linear-gradient(
+          to right,
+          rgba(47, 48, 58, 0),
+          rgba(47, 48, 58, 0)
+        ),
+        url(../images/bg-desktop/bg-library-desk-1x.jpg);
+
+      @media (min-device-pixel-ratio: 2),
+        (-webkit-min-device-pixel-ratio: 2),
+        (min-resolution: 192dpi),
+        (min-resolution: 2dppx) {
+        background-image: url(../images/bg-desktop/bg-library-desk-2x.jpg);
+      }
+    }
+  }
+
   .navigation {
     display: flex;
     justify-content: space-between;
@@ -82,7 +136,7 @@ header {
       @media screen and (min-width: 768px) {
         margin-left: 39px;
       }
-      
+
       margin-left: 10px;
       padding-bottom: 3px;
 

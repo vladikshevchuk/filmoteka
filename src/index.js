@@ -3,17 +3,27 @@ import templateFunctionEn from './templates/list-movies-en.hbs';
 import MoviesApiService from './js/api-service';
 import onSearchLine from './js/search-line';
 import refs from './js/refs';
-// import onClickLangEn from './js/change-language';
-// import onClickLangRu from './js/change-language';
-import paginationBtn from './js/pagination';
+import scroll from './js/scroll';
 
 const moviesApiService = new MoviesApiService();
 
 // первичная загрузка страницы
 
-moviesApiService.getMovies().then(movies => {
+function getMovies() {
+  moviesApiService.getMovies().then(movies => {
   refs.main.innerHTML = templateFunction(movies.data.results);
+
+  const itemsList = document.querySelectorAll('.js-item');
+
+  itemsList.forEach(el =>
+    el.addEventListener('click', e => {
+      console.log(e);
+    })
+  );
 });
+}
+
+getMovies();
 
 refs.form.addEventListener('submit', onSearchLine);
 
@@ -38,15 +48,12 @@ refs.menu.addEventListener('click', e => {
 
   moviesApiService.resetPage();
   refs.pageNumber.textContent = moviesApiService.page;
-  moviesApiService.getMovies().then(movies => {
-    refs.main.innerHTML = templateFunction(movies.data.results);
-  });
+  getMovies()
 });
 
 // переключение языка страницы
 
 refs.langEn.addEventListener('click', onClickLangEn);
-
 refs.langRu.addEventListener('click', onClickLangRu);
 
 function onClickLangEn() {
@@ -55,9 +62,7 @@ function onClickLangEn() {
 
   moviesApiService.changeLanguage('en');
 
-  moviesApiService.getMovies().then(movies => {
-    refs.main.innerHTML = templateFunctionEn(movies.data.results);
-  });
+  getMovies()
 }
 
 function onClickLangRu() {
@@ -66,9 +71,7 @@ function onClickLangRu() {
 
   moviesApiService.changeLanguage('ru');
 
-  moviesApiService.getMovies().then(movies => {
-    refs.main.innerHTML = templateFunction(movies.data.results);
-  });
+  getMovies()
 }
 
 // пагинация
@@ -77,18 +80,19 @@ refs.nextBtn.addEventListener('click', onNextBtn);
 refs.backBtn.addEventListener('click', onBackBtn);
 
 function onNextBtn() {
-    moviesApiService.nextPage();
-    refs.pageNumber.textContent = moviesApiService.page;
+  moviesApiService.nextPage();
+  refs.pageNumber.textContent = moviesApiService.page;
 
-    moviesApiService.getMovies().then(movies => {
-        refs.main.innerHTML = templateFunction(movies.data.results);
-    })
+  getMovies()
+
+  scroll();
 }
 
 function onBackBtn() {
   moviesApiService.backPage();
   refs.pageNumber.textContent = moviesApiService.page;
-  moviesApiService.getMovies().then(movies => {
-    refs.main.innerHTML = templateFunction(movies.data.results);
-  });
+
+  getMovies()
+
+  scroll();
 }
