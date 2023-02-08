@@ -27,7 +27,8 @@
 }
 
 .backBtn,
-.nextBtn {
+.nextBtn,
+.modalBtn {
   padding: 6px 10px;
 
   font-size: 12px;
@@ -42,4 +43,14 @@
   background: #ff6b01;
   border: 1px solid #ff6b01;
   cursor: pointer;
+}
+
+.modalBtn {
+  display: block;
+  margin-top: 20px;
+
+  @media screen and (max-width: 767px) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

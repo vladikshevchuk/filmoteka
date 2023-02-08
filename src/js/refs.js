@@ -6,6 +6,8 @@ export default refs = {
     navBtns: document.querySelector('.nav-buttons'),
     langRu: document.querySelector('.lang-ru'),
     langEn: document.querySelector('.lang-en'),
+
+    modal: document.querySelector('.modal-window'),
     
     backBtn: document.querySelector('#js-backBtn'),
     nextBtn: document.querySelector('#js-nextBtn'),

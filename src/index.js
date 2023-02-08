@@ -1,4 +1,5 @@
 import templateFunction from './templates/list-movies.hbs';
+import templateModalWindow from './templates/modal-window.hbs';
 import templateFunctionEn from './templates/list-movies-en.hbs';
 import MoviesApiService from './js/api-service';
 import onSearchLine from './js/search-line';
@@ -11,14 +12,20 @@ const moviesApiService = new MoviesApiService();
 
 function getMovies() {
   moviesApiService.getMovies().then(movies => {
-  refs.main.innerHTML = templateFunction(movies.data.results);
+    refs.main.innerHTML = templateFunction(movies.data.results);
+    
+    console.log(movies.data.results[0])
 
   const itemsList = document.querySelectorAll('.js-item');
 
-  itemsList.forEach(el =>
-    el.addEventListener('click', e => {
-      console.log(e);
-    })
+    itemsList.forEach((el, i) => {
+      el.id = `${i + 0}`;
+      el.addEventListener('click', e => {
+        // console.log(e.currentTarget.id);
+        
+        refs.modal.classList.add('open');
+        refs.modal.innerHTML = templateModalWindow(movies.data.results[e.currentTarget.id])
+    })}
   );
 });
 }
@@ -96,3 +103,13 @@ function onBackBtn() {
 
   scroll();
 }
+
+// Модальное окно
+
+refs.modal.addEventListener('click', e => {
+  if (e.target.classList.value === 'modal-window open') {
+    refs.modal.classList.remove('open');
+  }
+  
+  console.log(e.target.classList.value)
+});
