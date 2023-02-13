@@ -1,15 +1,28 @@
 import axios from 'axios';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import refs from './refs';
+import getRequests from './get-requests';
 
 const API_KEY = '?api_key=fb4eca5dd3545235e4fd6796c70d4d40';
 const MAIN_URL = 'https://api.themoviedb.org/3/';
 
 export default class MoviesApiService {
   constructor() {
-    this.searchQuery = '';
+    this.initialization = 'popular';
     this.page = 1;
     this.language = 'ru';
+    this.searchQuery = '';
+  }
+
+  getMovieData() {
+    const getRequest = getRequests.getRequest;
+
+    if (this.initialization === getRequest.POPULAR) {
+      return this.getMovies()
+    }
+    if (this.initialization === getRequest.BY_NAME) {
+      return this.getSearchMovies()
+    }
   }
 
   async getMovies() {
@@ -23,17 +36,16 @@ export default class MoviesApiService {
     }
   }
 
-  async getSearchMovies(query) {
+  async getSearchMovies() {
     try {
       const response = await axios.get(
-        `${MAIN_URL}search/movie${API_KEY}&language=${this.language}&page=${this.page}&query=${query}`
+        `${MAIN_URL}search/movie${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}`
       );
       if (response.data.results.length < 1) {
         Notify.warning(
           'Извините, ничего не удалось найти. Попробуйте изменить строку поиска'
         );
       } else {
-        Notify.success(`Найденно ${response.data.total_results} фильмов`);
         return response;
       }
     } catch (error) {
@@ -43,18 +55,6 @@ export default class MoviesApiService {
 
   cleanHTML() {
     return refs.main.innerHTML = '';
-  }
-
-  nextPage() {
-    this.page += 1;
-  }
-
-  backPage() {
-    if (this.page > 1) {
-      this.page -= 1;
-    }
-
-    return
   }
 
   getPage() {
@@ -73,15 +73,11 @@ export default class MoviesApiService {
     this.language = lang;
   }
 
-  get query() {
-    return this.searchQuery;
-  }
-
-  set query(newQuery) {
+  setQuery(newQuery) {
     this.searchQuery = newQuery;
   }
 
-  get pageNum() {
-    return this.page;
+  setInitialization(newInit) {
+    this.initialization = newInit;
   }
 }

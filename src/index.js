@@ -2,41 +2,55 @@ import templateFunction from './templates/list-movies.hbs';
 import templateModalWindow from './templates/modal-window.hbs';
 import templateFunctionEn from './templates/list-movies-en.hbs';
 import MoviesApiService from './js/api-service';
-import onSearchLine from './js/search-line';
 import refs from './js/refs';
 import scroll from './js/scroll';
 import pagination from './js/pagination';
+
 
 const moviesApiService = new MoviesApiService();
 
 // первичная загрузка страницы
 
 function getMovies() {
-  
-  moviesApiService.getMovies().then(movies => {
+  moviesApiService.getMovieData().then(movies => {
     refs.main.innerHTML = templateFunction(movies.data.results);
     
     pagination.movePageTo(moviesApiService.getPage());
 
-    console.log(movies.data.results[0])
-
-  const itemsList = document.querySelectorAll('.js-item');
+    const itemsList = document.querySelectorAll('.js-item');
 
     itemsList.forEach((el, i) => {
       el.id = `${i + 0}`;
       el.addEventListener('click', e => {
-        // console.log(e.currentTarget.id);
         
         refs.modal.classList.add('open');
         refs.modal.innerHTML = templateModalWindow(movies.data.results[e.currentTarget.id])
-    })}
-  );
-});
+      })
+    });
+  });
 }
 
 getMovies();
 
+// Поиск фильма по имени
+
 refs.form.addEventListener('submit', onSearchLine);
+
+function onSearchLine(event) {
+  event.preventDefault();
+  const {
+    elements: { search },
+  } = event.currentTarget;
+
+  moviesApiService.resetPage();
+  moviesApiService.setQuery(`${search.value}`);
+  moviesApiService.setInitialization('search');
+
+  console.log(moviesApiService.searchQuery);
+
+  getMovies();
+  scroll();
+}
 
 // переключение между вкладками
 
@@ -58,8 +72,8 @@ refs.menu.addEventListener('click', e => {
   refs.menu.classList.add('is-active');
 
   moviesApiService.resetPage();
-  refs.pageNumber.textContent = moviesApiService.page;
-  getMovies()
+  moviesApiService.setInitialization('popular');
+  getMovies();
 });
 
 // переключение языка страницы
@@ -89,9 +103,12 @@ function onClickLangRu() {
 
 refs.paginationRef.addEventListener('click', onPaginationsBtnClick);
 
-function onPaginationsBtnClick(event) {
+function onPaginationsBtnClick() {
   const currentPage = pagination.getCurrentPage();
   moviesApiService.setPage(currentPage);
+
+  getMovies()
+  scroll()
 }
 
 // Модальное окно
@@ -100,6 +117,4 @@ refs.modal.addEventListener('click', e => {
   if (e.target.classList.value === 'modal-window open') {
     refs.modal.classList.remove('open');
   }
-  
-  console.log(e.target.classList.value)
 });
