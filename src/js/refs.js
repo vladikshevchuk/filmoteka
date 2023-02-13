@@ -9,7 +9,5 @@ export default refs = {
 
     modal: document.querySelector('.modal-window'),
     
-    backBtn: document.querySelector('#js-backBtn'),
-    nextBtn: document.querySelector('#js-nextBtn'),
-    pageNumber: document.querySelector('#js-currentPageNumber'),
+    paginationRef: document.getElementById('tui-pagination-container'),
 }

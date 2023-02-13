@@ -1,0 +1,8 @@
+.tui-pagination {
+    margin-top: 30px;
+    text-align: center;
+
+    .tui-page-btn + .tui-page-btn {
+        margin-left: 10px;
+    }
+}

@@ -57,6 +57,14 @@ export default class MoviesApiService {
     return
   }
 
+  getPage() {
+    return this.page;
+  }
+
+  setPage(currentPage) {
+    this.page = currentPage;
+  }
+
   resetPage() {
     this.page = 1;
   }

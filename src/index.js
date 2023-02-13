@@ -5,15 +5,19 @@ import MoviesApiService from './js/api-service';
 import onSearchLine from './js/search-line';
 import refs from './js/refs';
 import scroll from './js/scroll';
+import pagination from './js/pagination';
 
 const moviesApiService = new MoviesApiService();
 
 // первичная загрузка страницы
 
 function getMovies() {
+  
   moviesApiService.getMovies().then(movies => {
     refs.main.innerHTML = templateFunction(movies.data.results);
     
+    pagination.movePageTo(moviesApiService.getPage());
+
     console.log(movies.data.results[0])
 
   const itemsList = document.querySelectorAll('.js-item');
@@ -83,25 +87,11 @@ function onClickLangRu() {
 
 // пагинация
 
-refs.nextBtn.addEventListener('click', onNextBtn);
-refs.backBtn.addEventListener('click', onBackBtn);
+refs.paginationRef.addEventListener('click', onPaginationsBtnClick);
 
-function onNextBtn() {
-  moviesApiService.nextPage();
-  refs.pageNumber.textContent = moviesApiService.page;
-
-  getMovies()
-
-  scroll();
-}
-
-function onBackBtn() {
-  moviesApiService.backPage();
-  refs.pageNumber.textContent = moviesApiService.page;
-
-  getMovies()
-
-  scroll();
+function onPaginationsBtnClick(event) {
+  const currentPage = pagination.getCurrentPage();
+  moviesApiService.setPage(currentPage);
 }
 
 // Модальное окно

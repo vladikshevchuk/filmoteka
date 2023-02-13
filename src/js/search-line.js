@@ -9,8 +9,12 @@ export default function onSearchLine(event) {
     elements: { search },
   } = event.currentTarget;
 
+  moviesApiService.resetPage(); 
+
     moviesApiService.getSearchMovies(search.value).then(movies => {
-        refs.main.innerHTML = templateFunction(movies.data.results)
+      refs.main.innerHTML = templateFunction(movies.data.results)
+      
+      
     });
 }
 
