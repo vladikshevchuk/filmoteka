@@ -27,6 +27,29 @@
 }
 
 .modalBtn {
+  padding: 6px 10px;
+
+  font-size: 12px;
+  line-height: 16px;
+  /* or 133% */
+  text-align: center;
+  text-transform: uppercase;
+
+  border-radius: 5px;
+  color: #ffffff;
+  background: #ff6b01;
+  border: 1px solid #ff6b01;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    border: 1px solid #ff6b01;
+    background-color: #fff;
+    color: #000000;
+  }
+}
+
+.modalBtn {
   display: block;
   margin-top: 20px;
 

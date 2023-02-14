@@ -1,5 +1,6 @@
 import templateFunction from './templates/list-movies.hbs';
 import templateModalWindow from './templates/modal-window.hbs';
+import templateModalWindowEn from './templates/modal-window-en.hbs';
 import templateFunctionEn from './templates/list-movies-en.hbs';
 import MoviesApiService from './js/api-service';
 import refs from './js/refs';
@@ -13,7 +14,11 @@ const moviesApiService = new MoviesApiService();
 
 function getMovies() {
   moviesApiService.getMovieData().then(movies => {
-    refs.main.innerHTML = templateFunction(movies.data.results);
+    if (moviesApiService.language === 'ru') {
+      refs.main.innerHTML = templateFunction(movies.data.results);
+    } else {
+      refs.main.innerHTML = templateFunctionEn(movies.data.results);
+    }
     
     pagination.movePageTo(moviesApiService.getPage());
 
@@ -24,7 +29,11 @@ function getMovies() {
       el.addEventListener('click', e => {
         
         refs.modal.classList.add('open');
-        refs.modal.innerHTML = templateModalWindow(movies.data.results[e.currentTarget.id])
+        if (moviesApiService.language === 'ru') {
+          refs.modal.innerHTML = templateModalWindow(movies.data.results[e.currentTarget.id]);
+        } else {
+          refs.modal.innerHTML = templateModalWindowEn(movies.data.results[e.currentTarget.id]);
+        }
       })
     });
   });
