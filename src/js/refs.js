@@ -1,4 +1,4 @@
-export default refs = {
+const refs = {
     main: document.querySelector('.content'),
     form: document.querySelector('form'),
     menu: document.querySelector('.js-menu'),
@@ -11,3 +11,5 @@ export default refs = {
     
     paginationRef: document.getElementById('tui-pagination-container'),
 }
+
+export default refs;
