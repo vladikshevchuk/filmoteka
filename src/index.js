@@ -8,6 +8,7 @@ import scroll from './js/scroll';
 import pagination from './js/pagination';
 
 
+
 const moviesApiService = new MoviesApiService();
 
 // первичная загрузка страницы
