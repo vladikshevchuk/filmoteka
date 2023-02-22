@@ -6,19 +6,23 @@ import MoviesApiService from './js/api-service';
 import refs from './js/refs';
 import scroll from './js/scroll';
 import pagination from './js/pagination';
+import onClickWatched from './js/watched-and-queue';
+import onClickQueue from './js/watched-and-queue';
 
 const moviesApiService = new MoviesApiService();
 
 // первичная загрузка страницы
+let watchedMovies = {};
+let queueMovies = {};
 
 function getMovies() {
   moviesApiService.getMovieData().then(movies => {
-    if (moviesApiService.language === 'ru') {
+    if (moviesApiService.language === 'ru-RU') {
       refs.main.innerHTML = templateFunction(movies.data.results);
     } else {
       refs.main.innerHTML = templateFunctionEn(movies.data.results);
     }
-    
+
     pagination.movePageTo(moviesApiService.getPage());
 
     const itemsList = document.querySelectorAll('.js-item');
@@ -26,14 +30,32 @@ function getMovies() {
     itemsList.forEach((el, i) => {
       el.id = `${i + 0}`;
       el.addEventListener('click', e => {
-        
         refs.modal.classList.add('open');
-        if (moviesApiService.language === 'ru') {
-          refs.modal.innerHTML = templateModalWindow(movies.data.results[e.currentTarget.id]);
+        if (moviesApiService.language === 'ru-RU') {
+          refs.modal.innerHTML = templateModalWindow(
+            movies.data.results[e.currentTarget.id]
+          );
         } else {
-          refs.modal.innerHTML = templateModalWindowEn(movies.data.results[e.currentTarget.id]);
+          refs.modal.innerHTML = templateModalWindowEn(
+            movies.data.results[e.currentTarget.id]
+          );
         }
-      })
+
+        const btnWatched = document.querySelector('.js-btn-watched');
+        const btnQueue = document.querySelector('.js-btn-queue');
+
+        btnWatched.addEventListener('click', e => {
+          watchedMovies[`movie${e.target.id}`] = e.target.id;
+          console.log(watchedMovies);
+          localStorage.watched = JSON.stringify(watchedMovies);
+        });
+
+        btnQueue.addEventListener('click', e => {
+          queueMovies[`movie${e.target.id}`] = e.target.id;
+          console.log(queueMovies);
+          localStorage.queue = JSON.stringify(queueMovies);
+        });
+      });
     });
   });
 }
@@ -70,6 +92,7 @@ refs.library.addEventListener('click', e => {
   refs.library.classList.add('is-active');
 
   moviesApiService.cleanHTML();
+  onClickQueue()
 });
 
 refs.menu.addEventListener('click', e => {
@@ -93,18 +116,18 @@ function onClickLangEn() {
   refs.langEn.classList.add('is-active');
   refs.langRu.classList.remove('is-active');
 
-  moviesApiService.changeLanguage('en');
+  moviesApiService.changeLanguage('en-US');
 
-  getMovies()
+  getMovies();
 }
 
 function onClickLangRu() {
   refs.langRu.classList.add('is-active');
   refs.langEn.classList.remove('is-active');
 
-  moviesApiService.changeLanguage('ru');
+  moviesApiService.changeLanguage('ru-RU');
 
-  getMovies()
+  getMovies();
 }
 
 // пагинация
@@ -115,8 +138,8 @@ function onPaginationsBtnClick() {
   const currentPage = pagination.getCurrentPage();
   moviesApiService.setPage(currentPage);
 
-  getMovies()
-  scroll()
+  getMovies();
+  scroll();
 }
 
 // Модальное окно
@@ -126,3 +149,21 @@ refs.modal.addEventListener('click', e => {
     refs.modal.classList.remove('open');
   }
 });
+
+// Выбор жанра
+
+// refs.genres.forEach(genre => {
+//   genre.addEventListener('click', e => {
+//     refs.genres.forEach(genre => genre.classList.remove('is-active-genre'));
+//     genre.classList.add('is-active-genre');
+
+//     moviesApiService.setGenre(genre.textContent);
+//     console.log(moviesApiService.getGenre());
+//   })
+// })
+
+// Добавление фильмов в локалсторидж
+
+refs.btnWatched.addEventListener('click', onClickWatched);
+
+refs.btnQueue.addEventListener('click', onClickQueue);

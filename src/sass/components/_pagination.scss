@@ -1,10 +1,15 @@
 .tui-pagination {
   margin-top: 30px;
+  margin-bottom: 15px;
   text-align: center;
 
   .tui-page-btn {
     color: #000;
-    padding: 6px 10px;
+    padding: 6px 5px;
+
+    @media screen and (min-width: 768px) {
+      padding: 6px 10px;
+    }
 
     font-size: 12px;
     line-height: 16px;
@@ -27,7 +32,9 @@
     color: #fff;
   }
 
-  .tui-page-btn + .tui-page-btn {
-    margin-left: 5px;
+  @media screen and (min-width: 768px) {
+    .tui-page-btn+.tui-page-btn {
+        margin-left: 5px;
+      }
   }
 }

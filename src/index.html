@@ -29,17 +29,40 @@
             </div>
           </div>
         </div>
-        <form class="search-line">
-          <input type="text" name="search" placeholder="Поиск фильмов">
-          <button>
-            <svg class="icon" width="24px" height="24px">
-              <use href="./images/symbol-defs.svg#icon-search"></use>
-            </svg>
-          </button>
+        <form class="search-block">
+          <div class="search-line">
+            <input type="text" name="search" placeholder="Поиск фильмов" />
+            <button type="submit">
+              <svg class="icon" width="24px" height="24px">
+                <use href="./images/symbol-defs.svg#icon-search"></use>
+              </svg>
+            </button>
+          </div>
+          <!-- <ul class="genres">
+            <li class="genre">боевик</li>
+            <li class="genre">вестерн</li>
+            <li class="genre">военный</li>
+            <li class="genre">детектив</li>
+            <li class="genre">документальный</li>
+            <li class="genre">драма</li>
+            <li class="genre">история</li>
+            <li class="genre">комедия</li>
+            <li class="genre">криминал</li>
+            <li class="genre">мелодрама</li>
+            <li class="genre">музыка</li>
+            <li class="genre">мультфильм</li>
+            <li class="genre">приключения</li>
+            <li class="genre">семейный</li>
+            <li class="genre">телевизионный фильм</li>
+            <li class="genre">триллер</li>
+            <li class="genre">ужасы</li>
+            <li class="genre">фантастика</li>
+            <li class="genre">фэнтези</li>
+          </ul> -->
         </form>
         <div class="nav-buttons is-hidden">
-          <button class="button">Watched</button>
-          <button class="button">Queue</button>
+          <button data-action="watched" class="button">Watched</button>
+          <button data-action="queue" class="button">Queue</button>
         </div>
       </nav>
     </header>

@@ -10,8 +10,9 @@ export default class MoviesApiService {
   constructor() {
     this.initialization = 'popular';
     this.page = 1;
-    this.language = 'ru';
+    this.language = 'ru-RU';
     this.searchQuery = '';
+    this.genre = '';
   }
 
   getMovieData() {
@@ -42,12 +43,40 @@ export default class MoviesApiService {
         `${MAIN_URL}search/movie${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}`
       );
       if (response.data.results.length < 1) {
-        Notify.warning(
-          'Извините, ничего не удалось найти. Попробуйте изменить строку поиска'
-        );
+        if (this.language === 'ru') {
+          Notify.warning(
+          'Извините, ничего не удалось найти. Попробуйте изменить запрос'
+          );
+        } else {
+          Notify.warning(
+          'Sorry, nothing could be found. Try changing the request'
+          );
+        }
       } else {
         return response;
       }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  // async getGenreOfMovies() {
+  //   try {
+  //     const response = await axios.get(
+  //       `${MAIN_URL}discover/movie${API_KEY}&language=${this.language}&with_genres=${this.genre}&page=${this.page}`
+  //     )
+  //     return response;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  async getMoviesById(id) {
+    try {
+      const response = await axios.get(
+        `${MAIN_URL}movie/${id}${API_KEY}&language=${this.language}&append_to_response=videos,reviews,credits`
+      )
+      return response;
     } catch (error) {
       console.error(error);
     }
@@ -79,5 +108,13 @@ export default class MoviesApiService {
 
   setInitialization(newInit) {
     this.initialization = newInit;
+  }
+
+  getGenre() {
+    return this.genre;
+  }
+
+  setGenre(newGenry) {
+    this.genre = newGenry;
   }
 }

@@ -172,32 +172,59 @@ header {
     }
   }
 
-  .search-line {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+  .search-block {
+    margin-top: 30px;
 
-    button {
-      background-color: rgba(255, 255, 255, 0);
-    }
+    .search-line {
+      display: flex;
+      justify-content: center;
+      text-align: center;
 
-    input {
-      @media screen and (max-width: 767px) {
-        width: 200px;
+      button {
+        background-color: rgba(255, 255, 255, 0);
       }
 
-      @media screen and (min-width: 768px) {
-        width: 300px;
+      input {
+        @media screen and (max-width: 767px) {
+          width: 200px;
+        }
+
+        @media screen and (min-width: 768px) {
+          width: 300px;
+        }
+
+        margin-right: 10px;
+        padding-left: 10px;
+
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 24px;
       }
-
-      margin-right: 10px;
-      padding-left: 10px;
-
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 24px;
     }
+
+    // .genres {
+    //   max-width: 900px;
+    //   margin-left: auto;
+    //   margin-right: auto;
+
+    //   display: flex;
+    //   flex-wrap: wrap;
+    //   justify-content: center;
+    //   gap: 10px;
+
+    //   margin-top: 25px;
+
+    //   .genre {
+    //     color: #ffffff;
+    //     background-color: rgba(255, 255, 255, 0);
+
+    //     cursor: pointer;
+    //   }
+
+    //   .is-active-genre {
+    //     color: #ff6b01;
+    //   }
+    // }
   }
 
   .nav-buttons {
@@ -206,6 +233,11 @@ header {
 
     .button + .button {
       margin-left: 15px;
+    }
+
+    .is-active {
+      background: #ff6b01;
+        border: 1px solid #ff6b01;
     }
   }
 }

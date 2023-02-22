@@ -54,6 +54,7 @@
   background-color: #fff;
 
   .modal-img {
+    margin-bottom: 20px;
     @media screen and (min-width: 1024px) {
       height: 400px;
     }
@@ -71,6 +72,12 @@
 
     p {
       margin-top: 10px;
+    }
+
+    .modal-btns {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
     }
   }
 }

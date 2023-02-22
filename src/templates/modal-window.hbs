@@ -1,4 +1,4 @@
-<div class='modal-body'>
+<div id='{{id}}' class='modal-body'>
   <div class='modal-content'>
     <div>
       <img
@@ -15,7 +15,10 @@
       <p>Популярность: {{popularity}}</p>
       <h3>Описание:</h3>
       <p>{{overview}}</p>
-      <button class='modalBtn'>Add to queue</button>
+      <div class="modal-btns">
+        <button id='{{id}}' class='modalBtn js-btn-watched'>Add to watched</button>
+        <button id='{{id}}' class='modalBtn js-btn-queue'>Add to queue</button>
+      </div>
     </div>
   </div>
 </div>
