@@ -1,17 +1,15 @@
-<ul class='list'>
-  {{#each this}}
-    <li class='js-item item'>
-      <div class='movie__markup__img'>
-        <img
-          src='https://image.tmdb.org/t/p/w500{{poster_path}}'
-          alt={{title}}
-          width='300px'
-          height='450px'
-        />
-      </div>
-      <p>Название: {{original_title}}</p>
-      <p>Дата выхода: {{release_date}}</p>
-      <p>Рейтинг: {{vote_average}}</p>
-    </li>
-  {{/each}}
-</ul>
+{{#each this}}
+  <li id='{{id}}' class='js-item item'>
+    <div class='movie__markup__img'>
+      <img
+        src='https://image.tmdb.org/t/p/w500{{poster_path}}'
+        alt={{title}}
+        width='300px'
+        height='450px'
+      />
+    </div>
+    <p>Название: {{original_title}}</p>
+    <p>Дата выхода: {{release_date}}</p>
+    <p>Рейтинг: {{vote_average}}</p>
+  </li>
+{{/each}}

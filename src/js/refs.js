@@ -1,5 +1,5 @@
 const refs = {
-    main: document.querySelector('.content'),
+    main: document.querySelector('.list'),
     form: document.querySelector('form'),
     genres: document.querySelectorAll('.genre'),
     menu: document.querySelector('.js-menu'),

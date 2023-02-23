@@ -1,29 +1,28 @@
 import MoviesApiService from '../js/api-service';
 import templateLibrary from '../templates/movie-for-library.hbs';
 import refs from './refs';
+import scroll from './scroll';
 
 const moviesApiService = new MoviesApiService();
 
-export default function onClickWatched() {
+export function onClickWatched() {
   moviesApiService.cleanHTML();
   refs.main.insertAdjacentHTML('beforeend', '<p class="alert">Здесь пока ничего нет</p>');
 
   const watchedList = JSON.parse(localStorage.watched);
   console.log(Object.values(watchedList));
 
-  if (Object.values(watchedList).length > 0) {
+  Object.values(watchedList).forEach(e => {
     moviesApiService.cleanHTML();
 
-    Object.values(watchedList).forEach(e => {
-      moviesApiService.getMoviesById(e).then(movies => {
-        refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
-        console.log(movies);
-      });
+    moviesApiService.getMoviesById(e).then(movies => {
+      refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
     });
-  }
+  });
+  scroll();
 }
 
-export default function onClickQueue() {
+export function onClickQueue() {
   moviesApiService.cleanHTML();
   refs.main.insertAdjacentHTML('beforeend', '<p class="alert">Здесь пока ничего нет</p>');
 
@@ -37,4 +36,5 @@ export default function onClickQueue() {
       refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
     });
   });
+  scroll();
 }
