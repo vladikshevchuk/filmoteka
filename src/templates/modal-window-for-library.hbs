@@ -1,0 +1,25 @@
+<div id='{{id}}' class='modal-body'>
+    <div class='modal-content'>
+        <div>
+            <img class='modal-img' src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt={{title}} />
+        </div>
+        <div class='description'>
+            <h2>{{title}}</h2>
+            <p>Жанр: {{genres}}</p>
+            <p>Дата выхода: {{release_date}}</p>
+            <p>Оценка/всего проголосовало: {{vote_average}}/{{vote_count}}</p>
+            <p>Популярность: {{popularity}}</p>
+            <h3>Описание:</h3>
+            <p>{{overview}}</p>
+        </div>
+        <div class='trailer'>
+            <iframe class='trailer-video' src='https://www.youtube.com/embed/{{videos.results.0.key}}' frameborder='0'
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class='modal-btns'>
+            <button id='{{id}}' class='modalBtn js-btn-watched'>Remove from watched</button>
+            <button id='{{id}}' class='modalBtn js-btn-queue'>Remove from queue</button>
+        </div>
+    </div>
+</div>

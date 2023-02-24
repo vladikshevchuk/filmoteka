@@ -7,7 +7,9 @@ const moviesApiService = new MoviesApiService();
 let watchedMovies = {};
 let queueMovies = {};
 
-export default function modalWindow() {
+// Открытие модального окна и добавление фильма в очередь (локал сторидж) по клику на кнопку
+
+export function modalWindow() {
   const itemsList = document.querySelectorAll('.js-item');
 
   itemsList.forEach(el => {
@@ -26,13 +28,11 @@ export default function modalWindow() {
 
         btnAddToWatched.addEventListener('click', e => {
           watchedMovies[`movie${e.target.id}`] = e.target.id;
-          console.log(watchedMovies);
           localStorage.watched = JSON.stringify(watchedMovies);
         });
 
         btnAddToQueue.addEventListener('click', e => {
           queueMovies[`movie${e.target.id}`] = e.target.id;
-          console.log(queueMovies);
           localStorage.queue = JSON.stringify(queueMovies);
         });
       });

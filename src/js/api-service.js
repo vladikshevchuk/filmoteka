@@ -12,7 +12,7 @@ export default class MoviesApiService {
     this.page = 1;
     this.language = 'ru-RU';
     this.searchQuery = '';
-    this.genre = '';
+    // this.genre = '';
   }
 
   getMovieData() {
@@ -43,7 +43,7 @@ export default class MoviesApiService {
         `${MAIN_URL}search/movie${API_KEY}&language=${this.language}&page=${this.page}&query=${this.searchQuery}`
       );
       if (response.data.results.length < 1) {
-        if (this.language === 'ru') {
+        if (this.language === 'ru-Ru') {
           Notify.warning(
           'Извините, ничего не удалось найти. Попробуйте изменить запрос'
           );

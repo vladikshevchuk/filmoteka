@@ -5,7 +5,7 @@ import refs from './js/refs';
 import scroll from './js/scroll';
 import pagination from './js/pagination';
 import { onClickWatched, onClickQueue } from './js/watched-and-queue';
-import modalWindow from './js/modal-window';
+import { modalWindow } from './js/modal-window';
 
 const moviesApiService = new MoviesApiService();
 
@@ -21,7 +21,7 @@ function getMovies() {
 
     pagination.movePageTo(moviesApiService.getPage());
 
-    modalWindow()
+    modalWindow();
   });
 }
 
@@ -41,8 +41,6 @@ function onSearchLine(event) {
   moviesApiService.setQuery(`${search.value}`);
   moviesApiService.setInitialization('search');
 
-  console.log(moviesApiService.searchQuery);
-
   getMovies();
   scroll();
 }
@@ -59,7 +57,8 @@ refs.library.addEventListener('click', e => {
   refs.paginationRef.classList.add('is-hidden');
 
   moviesApiService.cleanHTML();
-  refs.main.insertAdjacentHTML('beforeend', '<ul class="list"></ul>')
+  refs.main.insertAdjacentHTML('beforeend', '<ul class="list"></ul>');
+  onClickWatched();
 });
 
 refs.menu.addEventListener('click', e => {
