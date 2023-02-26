@@ -176,29 +176,50 @@ header {
     margin-top: 30px;
 
     .search-line {
-      display: flex;
-      justify-content: center;
-      text-align: center;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+
+      @media screen and (max-width: 340px) {
+        width: 280px;
+      }
+
+      @media screen and (min-width: 341px) {
+        width: 300px;
+      }
 
       button {
+        position: absolute;
+        right: 0;
+
+        padding: 0;
         background-color: rgba(255, 255, 255, 0);
       }
 
       input {
-        @media screen and (max-width: 767px) {
-          width: 200px;
+        @media screen and (max-width: 340px) {
+          width: 280px;
         }
 
-        @media screen and (min-width: 768px) {
+        @media screen and (min-width: 341px) {
           width: 300px;
         }
 
-        margin-right: 10px;
         padding-left: 10px;
 
         font-weight: 400;
         font-size: 14px;
         line-height: 24px;
+
+        background-color: rgb(0, 0, 0, 0);
+        color: #ffffff;
+        border: 0;
+
+        border-bottom: 1px solid #ffffff;
+
+        &::placeholder {
+          color: #ffffff;
+        }
       }
     }
 
@@ -237,7 +258,7 @@ header {
 
     .is-active {
       background: #ff6b01;
-        border: 1px solid #ff6b01;
+      border: 1px solid #ff6b01;
     }
   }
 }
