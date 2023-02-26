@@ -40,7 +40,7 @@
           </div>
         </form>
         <div class="nav-buttons is-hidden">
-          <button data-action="watched" class="button">Watched</button>
+          <button data-action="watched" class="button is-active">Watched</button>
           <button data-action="queue" class="button">Queue</button>
         </div>
       </nav>
@@ -48,12 +48,12 @@
     <main class="container">
       <div class="modal-window"></div>
       <div class="content">
-        <ul class="list">
-        </ul>
+        <p class="alert is-hidden">Здесь пока ничего нет</p>
+        <ul class="list"></ul>
       </div>
-      <div id="tui-pagination-container" class="tui-pagination"></div>
+      <div id="tui-pagination-container" class="tui-pagination is-hidden"></div>
     </main>
-    <footer>
+    <footer class="position">
       <p>© 2023 | All Rights Reserved | Developed with</p>
       <svg class="icon icon-footer" width="24px" height="24px">
         <use href="./images/symbol-defs.svg#icon-Group"></use>

@@ -8,16 +8,24 @@ const moviesApiService = new MoviesApiService();
 
 export function onClickWatched() {
   moviesApiService.cleanHTML();
-  refs.main.insertAdjacentHTML('beforeend', '<p class="alert">Здесь пока ничего нет</p>');
+  refs.footer.classList.add('position');
+  refs.btnWatched.classList.add('is-active');
+  refs.btnQueue.classList.remove('is-active');
 
-  const watchedList = JSON.parse(localStorage.watched);
+  if (localStorage.watched === undefined) {
+    refs.alert.classList.remove('is-hidden');
+    return
+  } else {
+    watchedList = JSON.parse(localStorage.watched);
+  }
 
   Object.values(watchedList).forEach(e => {
     moviesApiService.cleanHTML();
 
     moviesApiService.getMoviesById(e).then(movies => {
+      refs.footer.classList.remove('position');
       refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
-    }); 
+    });
   });
   // setTimeout(() => {
   //     const itemsList = document.querySelectorAll('.js-item');
@@ -37,14 +45,23 @@ export function onClickWatched() {
 
 export function onClickQueue() {
   moviesApiService.cleanHTML();
-  refs.main.insertAdjacentHTML('beforeend', '<p class="alert">Здесь пока ничего нет</p>');
-
-  const queueList = JSON.parse(localStorage.queue);
+  refs.footer.classList.add('position');
   
+  refs.btnWatched.classList.remove('is-active');
+  refs.btnQueue.classList.add('is-active');
+
+  if (localStorage.queue === undefined) {
+    refs.alert.classList.remove('is-hidden');
+    return
+  } else {
+    queueList = JSON.parse(localStorage.queue);
+  }
+
   Object.values(queueList).forEach(e => {
     moviesApiService.cleanHTML();
 
     moviesApiService.getMoviesById(e).then(movies => {
+      refs.footer.classList.remove('position');
       refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
     });
   });

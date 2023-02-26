@@ -24,6 +24,9 @@ export default class MoviesApiService {
     if (this.initialization === getRequest.BY_NAME) {
       return this.getSearchMovies()
     }
+    if (this.initialization === getRequest.BY_ID) {
+      return
+    }
   }
 
   async getMovies() {
@@ -76,6 +79,7 @@ export default class MoviesApiService {
       const response = await axios.get(
         `${MAIN_URL}movie/${id}${API_KEY}&language=${this.language}&append_to_response=videos,reviews,credits`
       )
+      console.log(this.language);
       return response;
     } catch (error) {
       console.error(error);
@@ -99,7 +103,12 @@ export default class MoviesApiService {
   }
 
   changeLanguage(lang) {
+    console.log('test', lang);
     this.language = lang;
+  }
+
+  getLanguage() {
+    return this.language;
   }
 
   setQuery(newQuery) {
