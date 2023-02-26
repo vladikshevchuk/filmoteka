@@ -127,6 +127,7 @@ function onPaginationsBtnClick() {
 
 refs.modal.addEventListener('click', e => {
   if (e.target.classList.value === 'modal-window open') {
+    refs.body.style.overflow = 'auto';
     refs.modal.classList.remove('open');
   }
 });

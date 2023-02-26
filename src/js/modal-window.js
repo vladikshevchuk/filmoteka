@@ -7,8 +7,6 @@ import no_movie from '../images/no-movie.jpg';
 const moviesApiService = new MoviesApiService();
 let watchedMovies = {};
 let queueMovies = {};
-localStorage.watched = JSON.stringify(watchedMovies);
-localStorage.queue = JSON.stringify(queueMovies);
 
 // Открытие модального окна и добавление фильма в очередь (локал сторидж) по клику на кнопку
 
@@ -20,7 +18,9 @@ export function modalWindow() {
       refs.modal.innerHTML = '';
       console.log('modal', moviesApiService.getLanguage());
       moviesApiService.getMoviesById(e.currentTarget.id).then(movie => {
+        movie.data.genres = movie.data.genres.map(genre => genre.name).join(', ');
         refs.modal.classList.add('open');
+        refs.body.style.overflow = 'hidden';
         if (movie.data.poster_path === null) {
           movie.data.poster_path = no_movie;
         } else {

@@ -1,4 +1,5 @@
 const refs = {
+    body: document.querySelector('body'),
     main: document.querySelector('.list'),
     alert: document.querySelector('.content'),
     form: document.querySelector('form'),
