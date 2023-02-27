@@ -1,5 +1,6 @@
 import MoviesApiService from '../js/api-service';
 import templateLibrary from '../templates/movie-for-library.hbs';
+import { modalWindow } from './modal-window';
 import { modalWindowForLibrary } from './modal-window';
 import refs from './refs';
 import scroll from './scroll';
@@ -13,20 +14,13 @@ export function onClickWatched() {
   refs.btnQueue.classList.remove('is-active');
 
   if (localStorage.watched === undefined) {
-    refs.alert.classList.remove('is-hidden');
-    return
+    // refs.alert.classList.remove('is-hidden');
+    return;
   } else {
     watchedList = JSON.parse(localStorage.watched);
   }
 
-  Object.values(watchedList).forEach(e => {
-    moviesApiService.cleanHTML();
-
-    moviesApiService.getMoviesById(e).then(movies => {
-      refs.footer.classList.remove('position');
-      refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
-    });
-  });
+  createList(watchedList);
   // setTimeout(() => {
   //     const itemsList = document.querySelectorAll('.js-item');
   //     console.log(itemsList);
@@ -46,18 +40,23 @@ export function onClickWatched() {
 export function onClickQueue() {
   moviesApiService.cleanHTML();
   refs.footer.classList.add('position');
-  
+
   refs.btnWatched.classList.remove('is-active');
   refs.btnQueue.classList.add('is-active');
 
   if (localStorage.queue === undefined) {
     refs.alert.classList.remove('is-hidden');
-    return
+    return;
   } else {
     queueList = JSON.parse(localStorage.queue);
   }
 
-  Object.values(queueList).forEach(e => {
+  createList(queueList);
+  scroll();
+}
+
+function createList(list) {
+  Object.values(list).forEach(e => {
     moviesApiService.cleanHTML();
 
     moviesApiService.getMoviesById(e).then(movies => {
@@ -65,5 +64,13 @@ export function onClickQueue() {
       refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
     });
   });
-  scroll();
+}
+
+function xxx() {
+  const itemsList = document.querySelectorAll('.js-item');
+  console.log(itemsList);
+
+  itemsList.forEach(item =>
+    item.addEventListener('click', e => console.log('hi'))
+  );
 }
