@@ -10,6 +10,14 @@ const moviesApiService = new MoviesApiService();
 let watchedMovies = {};
 let queueMovies = {};
 
+if (localStorage.watched) {
+  watchedMovies = JSON.parse(localStorage.watched);
+}
+
+if (localStorage.queue) {
+  queueMovies = JSON.parse(localStorage.queue);
+}
+
 // Открытие модального окна и добавление фильма в очередь (локал сторидж) по клику на кнопку
 
 export function modalWindow() {
@@ -84,7 +92,7 @@ export function modalWindowForLibrary(e) {
     const btnAddToQueue = document.querySelector('.js-btn-queue');
 
     btnAddToWatched.addEventListener('click', e => {
-      watchedMovies[`movie${e.target.id}`] = null;
+      delete watchedMovies[`movie${e.target.id}`];
       localStorage.watched = JSON.stringify(watchedMovies);
       btnAddToWatched.disabled = true;
       btnAddToWatched.classList.add('is-focus');
@@ -96,11 +104,11 @@ export function modalWindowForLibrary(e) {
     });
 
     btnAddToQueue.addEventListener('click', e => {
-      queueMovies[`movie${e.target.id}`] = null;
+      delete queueMovies[`movie${e.target.id}`];
       localStorage.queue = JSON.stringify(queueMovies);
       btnAddToQueue.disabled = true;
       btnAddToQueue.classList.add('is-focus');
-      if (refs.btnQueue.classList('button is-active')) {
+      if (refs.btnQueue.classList.value === 'button is-active') {
         onClickQueue();
         refs.body.style.overflow = 'auto';
         refs.modal.classList.remove('open');
