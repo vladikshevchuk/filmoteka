@@ -42,13 +42,12 @@
   background: #ff6b01;
   border: 1px solid #ff6b01;
   cursor: pointer;
+}
 
-  &:hover,
-  &:focus {
-    border: 1px solid #ff6b01;
+.is-focus {
+  border: 1px solid #ff6b01;
     background-color: #fff;
     color: #000000;
-  }
 }
 
 // .modalBtn {

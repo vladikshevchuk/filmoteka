@@ -5,7 +5,7 @@ import refs from './js/refs';
 import scroll from './js/scroll';
 import pagination from './js/pagination';
 import { onClickWatched, onClickQueue } from './js/watched-and-queue';
-import { modalWindow } from './js/modal-window';
+import { modalWindow, closeModalWindow } from './js/modal-window';
 import no_movie from './images/no-movie.jpg'; 
 import spinner from './js/spinner';
 
@@ -37,7 +37,7 @@ function getMovies() {
   });
 }
 
-setTimeout(() => {getMovies()}, 2000);
+setTimeout(() => {getMovies()}, 1000);
 
 // Поиск фильма по имени
 
@@ -125,12 +125,7 @@ function onPaginationsBtnClick() {
 
 // Закрытие модального окна
 
-refs.modal.addEventListener('click', e => {
-  if (e.target.classList.value === 'modal-window open') {
-    refs.body.style.overflow = 'auto';
-    refs.modal.classList.remove('open');
-  }
-});
+refs.modal.addEventListener('click', closeModalWindow);
 
 // Работа кнопок Queue и Watched
 

@@ -1,6 +1,5 @@
 import MoviesApiService from '../js/api-service';
 import templateLibrary from '../templates/movie-for-library.hbs';
-import { modalWindow } from './modal-window';
 import { modalWindowForLibrary } from './modal-window';
 import refs from './refs';
 import scroll from './scroll';
@@ -21,19 +20,6 @@ export function onClickWatched() {
   }
 
   createList(watchedList);
-  // setTimeout(() => {
-  //     const itemsList = document.querySelectorAll('.js-item');
-  //     console.log(itemsList);
-  //     itemsList.forEach(item => {
-  //       item.addEventListener('click', e => {
-  //         console.log(e.currentTarget.id);
-  //         refs.modal.classList.add('open');
-  //         moviesApiService.getMoviesById(e).then(movies => {
-  //     refs.main.insertAdjacentHTML('beforeend', modalWindowForLibrary(movies.data));
-  //   });
-  //       })
-  //     })
-  //   }, 1000)
   scroll();
 }
 
@@ -62,15 +48,10 @@ function createList(list) {
     moviesApiService.getMoviesById(e).then(movies => {
       refs.footer.classList.remove('position');
       refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
+
+      const item = document.getElementById(`${e}`);
+      console.log(item);
+      item.addEventListener('click', modalWindowForLibrary);
     });
   });
-}
-
-function xxx() {
-  const itemsList = document.querySelectorAll('.js-item');
-  console.log(itemsList);
-
-  itemsList.forEach(item =>
-    item.addEventListener('click', e => console.log('hi'))
-  );
 }

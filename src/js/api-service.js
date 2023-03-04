@@ -77,9 +77,9 @@ export default class MoviesApiService {
   async getMoviesById(id) {
     try {
       const response = await axios.get(
-        `${MAIN_URL}movie/${id}${API_KEY}&language=${this.language}&append_to_response=videos,reviews,credits`
+        `${MAIN_URL}movie/${id}${API_KEY}&language=${this.language}&append_to_response=videos`
       )
-      console.log(this.language);
+      // console.log(this.language);
       return response;
     } catch (error) {
       console.error(error);
