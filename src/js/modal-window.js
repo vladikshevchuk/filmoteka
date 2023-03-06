@@ -9,6 +9,7 @@ import { onClickWatched, onClickQueue } from '../js/watched-and-queue';
 const moviesApiService = new MoviesApiService();
 let watchedMovies = {};
 let queueMovies = {};
+let targetIdMovie = 0;
 
 if (localStorage.watched) {
   watchedMovies = JSON.parse(localStorage.watched);
@@ -26,7 +27,7 @@ export function modalWindow() {
   itemsList.forEach(el => {
     el.addEventListener('click', e => {
       refs.modal.innerHTML = '';
-      console.log('modal', moviesApiService.getLanguage());
+      targetIdMovie = e.currentTarget.id;
       moviesApiService.getMoviesById(e.currentTarget.id).then(movie => {
         movie.data.genres = movie.data.genres
           .map(genre => genre.name)
@@ -49,21 +50,33 @@ export function modalWindow() {
         const btnAddToWatched = document.querySelector('.js-btn-watched');
         const btnAddToQueue = document.querySelector('.js-btn-queue');
 
-        btnAddToWatched.addEventListener('click', e => {
-          watchedMovies[`movie${e.target.id}`] = e.target.id;
-          localStorage.watched = JSON.stringify(watchedMovies);
+        if (
+          Object.values(watchedMovies).some(value => value === targetIdMovie)
+        ) {
           btnAddToWatched.disabled = true;
           btnAddToWatched.classList.add('is-focus');
-          console.log(btnAddToWatched);
-        });
+        } else {
+          btnAddToWatched.addEventListener('click', e => {
+            watchedMovies[`movie${e.target.id}`] = e.target.id;
+            localStorage.watched = JSON.stringify(watchedMovies);
+            btnAddToWatched.disabled = true;
+            btnAddToWatched.classList.add('is-focus');
+            console.log(btnAddToWatched);
+          });
+        }
 
-        btnAddToQueue.addEventListener('click', e => {
-          queueMovies[`movie${e.target.id}`] = e.target.id;
-          localStorage.queue = JSON.stringify(queueMovies);
-          btnAddToQueue.disabled = true;
-          btnAddToQueue.classList.add('is-focus');
-          console.log(btnAddToQueue);
-        });
+        if (Object.values(queueMovies).some(value => value === targetIdMovie)) {
+          btnAddToWatched.disabled = true;
+          btnAddToWatched.classList.add('is-focus');
+        } else {
+          btnAddToQueue.addEventListener('click', e => {
+            queueMovies[`movie${e.target.id}`] = e.target.id;
+            localStorage.queue = JSON.stringify(queueMovies);
+            btnAddToQueue.disabled = true;
+            btnAddToQueue.classList.add('is-focus');
+            console.log(btnAddToQueue);
+          });
+        }
       });
     });
   });
@@ -71,6 +84,7 @@ export function modalWindow() {
 
 export function modalWindowForLibrary(e) {
   refs.modal.innerHTML = '';
+  targetIdMovie = e.currentTarget.id;
   moviesApiService.getMoviesById(e.currentTarget.id).then(movie => {
     movie.data.genres = movie.data.genres.map(genre => genre.name).join(', ');
     refs.modal.classList.add('open');
@@ -90,6 +104,16 @@ export function modalWindowForLibrary(e) {
 
     const btnAddToWatched = document.querySelector('.js-btn-watched');
     const btnAddToQueue = document.querySelector('.js-btn-queue');
+
+    if (!Object.values(watchedMovies).some(value => value === targetIdMovie)) {
+      btnAddToWatched.disabled = true;
+      btnAddToWatched.classList.add('is-focus');
+    }
+
+    if (!Object.values(queueMovies).some(value => value === targetIdMovie)) {
+      btnAddToQueue.disabled = true;
+      btnAddToQueue.classList.add('is-focus');
+    }
 
     btnAddToWatched.addEventListener('click', e => {
       delete watchedMovies[`movie${e.target.id}`];
