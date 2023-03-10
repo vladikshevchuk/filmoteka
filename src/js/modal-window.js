@@ -28,6 +28,7 @@ export function modalWindow() {
     el.addEventListener('click', e => {
       refs.modal.innerHTML = '';
       targetIdMovie = e.currentTarget.id;
+      console.log(moviesApiService.getLanguage());
       moviesApiService.getMoviesById(e.currentTarget.id).then(movie => {
         movie.data.genres = movie.data.genres
           .map(genre => genre.name)

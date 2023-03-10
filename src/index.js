@@ -37,7 +37,7 @@ function getMovies() {
   });
 }
 
-setTimeout(() => {getMovies()}, 1000);
+setTimeout(() => {getMovies()}, 2000);
 
 // Поиск фильма по имени
 
