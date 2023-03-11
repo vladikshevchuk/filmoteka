@@ -28,7 +28,8 @@ export function modalWindow() {
     el.addEventListener('click', e => {
       refs.modal.innerHTML = '';
       targetIdMovie = e.currentTarget.id;
-      console.log(moviesApiService.getLanguage());
+      const lang = localStorage.getItem('language');
+
       moviesApiService.getMoviesById(e.currentTarget.id).then(movie => {
         movie.data.genres = movie.data.genres
           .map(genre => genre.name)
@@ -42,7 +43,7 @@ export function modalWindow() {
             'https://image.tmdb.org/t/p/w500' + movie.data.poster_path;
         }
 
-        if (moviesApiService.language === 'ru-RU') {
+        if (lang === 'ru-RU') {
           refs.modal.innerHTML = templateModalWindow(movie.data);
         } else {
           refs.modal.innerHTML = templateModalWindowEn(movie.data);
@@ -62,7 +63,6 @@ export function modalWindow() {
             localStorage.watched = JSON.stringify(watchedMovies);
             btnAddToWatched.disabled = true;
             btnAddToWatched.classList.add('is-focus');
-            console.log(btnAddToWatched);
           });
         }
 
@@ -75,7 +75,6 @@ export function modalWindow() {
             localStorage.queue = JSON.stringify(queueMovies);
             btnAddToQueue.disabled = true;
             btnAddToQueue.classList.add('is-focus');
-            console.log(btnAddToQueue);
           });
         }
       });
