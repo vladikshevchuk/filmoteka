@@ -3,6 +3,7 @@ import MoviesApiService from './api-service';
 import templateModalWindow from '../templates/modal-window.hbs';
 import templateModalWindowEn from '../templates/modal-window-en.hbs';
 import templateModalWindowForLibrary from '../templates/modal-window-for-library.hbs';
+import templateModalWindowForLibraryEn from '../templates/modal-window-for-library-en.hbs';
 import no_movie from '../images/no-movie.jpg';
 import { onClickWatched, onClickQueue } from '../js/watched-and-queue';
 
@@ -84,6 +85,7 @@ export function modalWindow() {
 
 export function modalWindowForLibrary(e) {
   refs.modal.innerHTML = '';
+  const lang = localStorage.getItem('language');
   targetIdMovie = e.currentTarget.id;
   moviesApiService.getMoviesById(e.currentTarget.id).then(movie => {
     movie.data.genres = movie.data.genres.map(genre => genre.name).join(', ');
@@ -96,10 +98,10 @@ export function modalWindowForLibrary(e) {
         'https://image.tmdb.org/t/p/w500' + movie.data.poster_path;
     }
 
-    if (moviesApiService.language === 'ru-RU') {
+    if (lang === 'ru-RU') {
       refs.modal.innerHTML = templateModalWindowForLibrary(movie.data);
     } else {
-      refs.modal.innerHTML = templateModalWindowEn(movie.data);
+      refs.modal.innerHTML = templateModalWindowForLibraryEn(movie.data);
     }
 
     const btnAddToWatched = document.querySelector('.js-btn-watched');

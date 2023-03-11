@@ -10,9 +10,8 @@ export default class MoviesApiService {
   constructor() {
     this.initialization = 'popular';
     this.page = 1;
-    this.language = 'ru-RU';
+    this.language = localStorage.getItem('language');
     this.searchQuery = '';
-    // this.genre = '';
   }
 
   getMovieData() {
@@ -62,17 +61,6 @@ export default class MoviesApiService {
       console.error(error);
     }
   }
-
-  // async getGenreOfMovies() {
-  //   try {
-  //     const response = await axios.get(
-  //       `${MAIN_URL}discover/movie${API_KEY}&language=${this.language}&with_genres=${this.genre}&page=${this.page}`
-  //     )
-  //     return response;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
 
   async getMoviesById(id) {
     const lang = localStorage.getItem('language');

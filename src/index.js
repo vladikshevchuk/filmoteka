@@ -14,30 +14,38 @@ const moviesApiService = new MoviesApiService();
 // Загрузка страницы
 
 function getMovies() {
-  moviesApiService.getMovieData().then(movies => {
-    movies.data.results.map(movie => {
-      if (movie.poster_path === null) {
-        movie.poster_path = no_movie;
-      } else {
-        movie.poster_path =
-          'https://image.tmdb.org/t/p/w500' + movie.poster_path;
-      }
-      return movie;
-    });
-    const lang = localStorage.getItem('language');
-
-    if (lang === 'ru-RU') {
-      refs.main.innerHTML = templateFunction(movies.data.results);
+  if (moviesApiService.getMovieData() === undefined) {
+    if (refs.btnWatched.classList.value === 'button is-active') {
+      onClickWatched();
     } else {
-      refs.main.innerHTML = templateFunctionEn(movies.data.results);
+      onClickQueue();
     }
+  } else {
+    moviesApiService.getMovieData().then(movies => {
+      movies.data.results.map(movie => {
+        if (movie.poster_path === null) {
+          movie.poster_path = no_movie;
+        } else {
+          movie.poster_path =
+            'https://image.tmdb.org/t/p/w500' + movie.poster_path;
+        }
+        return movie;
+      });
+      const lang = localStorage.getItem('language');
 
-    refs.paginationRef.classList.remove('is-hidden');
-    refs.footer.classList.remove('position');
-    pagination.movePageTo(moviesApiService.getPage());
+      if (lang === 'ru-RU') {
+        refs.main.innerHTML = templateFunction(movies.data.results);
+      } else {
+        refs.main.innerHTML = templateFunctionEn(movies.data.results);
+      }
 
-    modalWindow();
-  });
+      refs.paginationRef.classList.remove('is-hidden');
+      refs.footer.classList.remove('position');
+      pagination.movePageTo(moviesApiService.getPage());
+
+      modalWindow();
+    });
+  }
 }
 
 setTimeout(() => {
@@ -94,6 +102,7 @@ refs.menu.addEventListener('click', e => {
 });
 
 // переключение языка страницы
+moviesApiService.changeLanguage('ru-RU');
 
 refs.langEn.addEventListener('click', onClickLangEn);
 refs.langRu.addEventListener('click', onClickLangRu);

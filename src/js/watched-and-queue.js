@@ -1,5 +1,6 @@
 import MoviesApiService from '../js/api-service';
 import templateLibrary from '../templates/movie-for-library.hbs';
+import templateLibraryEn from '../templates/movie-for-library-en.hbs';
 import { modalWindowForLibrary } from './modal-window';
 import refs from './refs';
 import scroll from './scroll';
@@ -55,7 +56,7 @@ function createList(list) {
         refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
       } else {
         // make hbs for english
-        refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
+        refs.main.insertAdjacentHTML('beforeend', templateLibraryEn(movies.data));
       }
 
       const item = document.getElementById(`${e}`);

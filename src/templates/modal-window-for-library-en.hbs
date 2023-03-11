@@ -1,0 +1,18 @@
+<div id='{{id}}' class='modal-body'>
+    <div class='modal-content'>
+        <div>
+            <img class='modal-img' src='https://image.tmdb.org/t/p/w500{{poster_path}}' alt={{title}} />
+        </div>
+        <div class='description'>
+            <h2>{{title}}</h2>
+            <p>Genre: {{genres}}</p>
+            <p>Realise date: {{release_date}}</p>
+            <p>Voute average/count: {{vote_average}}/{{vote_count}}</p>
+            <p>Popularity: {{popularity}}</p>
+            <h3>Description:</h3>
+            <p>{{overview}}</p>
+            <button id='{{id}}' class='modalBtn js-btn-watched'>Remove from watched</button>
+            <button id='{{id}}' class='modalBtn js-btn-queue'>Remove from queue</button>
+        </div>
+    </div>
+</div>
