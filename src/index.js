@@ -6,7 +6,7 @@ import scroll from './js/scroll';
 import pagination from './js/pagination';
 import { onClickWatched, onClickQueue } from './js/watched-and-queue';
 import { modalWindow, closeModalWindow } from './js/modal-window';
-import no_movie from './images/no-movie.jpg'; 
+import no_movie from './images/no-movie.jpg';
 import spinner from './js/spinner';
 
 const moviesApiService = new MoviesApiService();
@@ -19,11 +19,14 @@ function getMovies() {
       if (movie.poster_path === null) {
         movie.poster_path = no_movie;
       } else {
-        movie.poster_path = 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
+        movie.poster_path =
+          'https://image.tmdb.org/t/p/w500' + movie.poster_path;
       }
       return movie;
-    })
-    if (moviesApiService.language === 'ru-RU') {
+    });
+    const lang = localStorage.getItem('language');
+
+    if (lang === 'ru-RU') {
       refs.main.innerHTML = templateFunction(movies.data.results);
     } else {
       refs.main.innerHTML = templateFunctionEn(movies.data.results);
@@ -37,7 +40,9 @@ function getMovies() {
   });
 }
 
-setTimeout(() => {getMovies()}, 2000);
+setTimeout(() => {
+  getMovies();
+}, 2000);
 
 // Поиск фильма по имени
 

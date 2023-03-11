@@ -11,6 +11,7 @@ export function onClickWatched() {
   refs.footer.classList.add('position');
   refs.btnWatched.classList.add('is-active');
   refs.btnQueue.classList.remove('is-active');
+  let watchedList;
 
   if (localStorage.watched === undefined) {
     // refs.alert.classList.remove('is-hidden');
@@ -42,15 +43,22 @@ export function onClickQueue() {
 }
 
 function createList(list) {
+  const lang = localStorage.getItem('language');
+
   Object.values(list).forEach(e => {
     moviesApiService.cleanHTML();
 
     moviesApiService.getMoviesById(e).then(movies => {
       refs.footer.classList.remove('position');
-      refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
+
+      if (lang === 'ru-RU') {
+        refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
+      } else {
+        // make hbs for english
+        refs.main.insertAdjacentHTML('beforeend', templateLibrary(movies.data));
+      }
 
       const item = document.getElementById(`${e}`);
-      console.log(item);
       item.addEventListener('click', modalWindowForLibrary);
     });
   });

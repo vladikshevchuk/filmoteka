@@ -19,13 +19,13 @@ export default class MoviesApiService {
     const getRequest = getRequests.getRequest;
 
     if (this.initialization === getRequest.POPULAR) {
-      return this.getMovies()
+      return this.getMovies();
     }
     if (this.initialization === getRequest.BY_NAME) {
-      return this.getSearchMovies()
+      return this.getSearchMovies();
     }
     if (this.initialization === getRequest.BY_ID) {
-      return
+      return;
     }
   }
 
@@ -48,11 +48,11 @@ export default class MoviesApiService {
       if (response.data.results.length < 1) {
         if (this.language === 'ru-Ru') {
           Notify.warning(
-          'Извините, ничего не удалось найти. Попробуйте изменить запрос'
+            'Извините, ничего не удалось найти. Попробуйте изменить запрос'
           );
         } else {
           Notify.warning(
-          'Sorry, nothing could be found. Try changing the request'
+            'Sorry, nothing could be found. Try changing the request'
           );
         }
       } else {
@@ -75,11 +75,12 @@ export default class MoviesApiService {
   // }
 
   async getMoviesById(id) {
+    const lang = localStorage.getItem('language');
+
     try {
       const response = await axios.get(
-        `${MAIN_URL}movie/${id}${API_KEY}&language=${this.language}&append_to_response=videos`
-      )
-      // console.log(this.language);
+        `${MAIN_URL}movie/${id}${API_KEY}&language=${lang}&append_to_response=videos`
+      );
       return response;
     } catch (error) {
       console.error(error);
@@ -87,7 +88,7 @@ export default class MoviesApiService {
   }
 
   cleanHTML() {
-    return refs.main.innerHTML = '';
+    return (refs.main.innerHTML = '');
   }
 
   getPage() {
@@ -103,7 +104,7 @@ export default class MoviesApiService {
   }
 
   changeLanguage(lang) {
-    console.log('test', lang);
+    localStorage.setItem('language', lang);
     this.language = lang;
   }
 
