@@ -28,6 +28,7 @@ export function onClickWatched() {
 export function onClickQueue() {
   moviesApiService.cleanHTML();
   refs.footer.classList.add('position');
+  let queueList;
 
   refs.btnWatched.classList.remove('is-active');
   refs.btnQueue.classList.add('is-active');
